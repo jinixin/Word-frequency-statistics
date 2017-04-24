@@ -1,8 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<math.h>
-#include<ctype.h>
+#include<iostream>
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<cmath>
+#include<cctype>
+using namespace std;
 struct stu
 {
     char p[50];
@@ -71,19 +73,23 @@ void duruzongshu()
 }
 void chajieguo(int fl)
 {
-    int xx,sx,i;
+    int xx,sx,i,zgs;
     if(fl==1)
     {
          printf("\n请输入单词在本文出现次数的下限：");
          scanf("%d",&xx);
          printf("\n请输入单词在本文出现次数的上限：");
          scanf("%d",&sx);
-         printf("\n    单词     本文次数\n");
+         for(zgs=0,i=0;i<gs;i++)
+         {
+             zgs+=du[i].wz;
+         }
+         printf("\n  单词                   本文次数    千分比（占本篇文章）\n");
          for(i=0;i<gs;i++)
          {
              if(du[i].wz>=xx&&du[i].wz<=sx)
              {
-                  printf("%s   %d\n",du[i].p,du[i].wz);
+                  printf("  %-20s    %5d        %.2lf\n",du[i].p,du[i].wz,du[i].wz*1000.0/zgs);
              }
          }
          printf("\n已输出所有符合条件的单词\n");
@@ -94,12 +100,16 @@ void chajieguo(int fl)
         scanf("%d",&xx);
         printf("\n请输入单词出现总共次数的上限：");
         scanf("%d",&sx);
-        printf("\n    单词     本文次数     总共次数\n");
+        for(zgs=0,i=0;i<k;i++)
+        {
+            zgs+=zu[i].zg;
+        }
+        printf("\n  单词                   总共次数    千分比（占总共次数）\n");
         for(i=0;i<k;i++)
         {
             if(zu[i].zg>=xx&&zu[i].zg<=sx)
             {
-                printf("%s %d     %d\n",zu[i].p,zu[i].wz,zu[i].zg);
+                printf("  %-20s    %5d        %.2lf\n",zu[i].p,zu[i].zg,zu[i].zg*1000.0/zgs);
             }
         }
         printf("\n已输出所有符合条件的单词\n");
@@ -398,10 +408,10 @@ void fuzhu()
 int main()
 {
     int xz1,xz2;
-    printf("*****************************************\n\n\n\n\n\n       欢迎使用词数统计程序 V1.2\n\n\n\n\n\n*****************************************\n\n");
+    printf("*****************************************\n\n\n\n\n\n       欢迎使用词数统计程序 V1.3\n\n\n\n\n\n*****************************************\n\n");
     while(1)
     {
-        printf("\n1.添加新文章\n2.查看汇总数据\n3.退出程序\n\n请选择：");
+        printf("\n1.添加新文章\n2.查看汇总数据\n3.联系我们\n4.退出程序\n\n请选择：");
         scanf("%d",&xz1);
         if(xz1==1)
         {
@@ -465,6 +475,19 @@ int main()
             }
         }
         else if(xz1==3)
+        {
+            printf("\n程序名称：单词个数统计程序\n");
+            printf("程序版本：V1.3\n");
+            printf("内核版本：V1.0（基于优化）\n");
+            printf("内核设计时间：2014/7/28\n");
+            printf("初次开发时间：2014/7/30\n");
+            printf("最后更新时间：2014/9/27\n");
+            printf("开发语言：C/C++\n");
+            printf("开发所属：AEM工程\n");
+            printf("开发者  ：Beifeng\n");
+            printf("\n如有任何改进意见，请联系我们：jinixinwork@sina.com\n");
+        }
+        else if(xz1==4)
         {
             printf("\n已经为您安全退出程序\n\n请您按任意键退出本对话框\n");
             break;
