@@ -11,7 +11,8 @@ struct stu
     int wz;
     int zg;
 }du[50000],zu[800000];
-int gs,k;
+char shanchu[10000][30];
+int gs,k,shanchugeshu;
 int wzsx(const void *a,const void *b)
 {
     return(*(struct stu*)a).wz>(*(struct stu*)b).wz?1:-1;
@@ -36,9 +37,69 @@ int zdx(const void *a,const void *b)
        return -1;
     return 0;
 }
+void shanchuzong()
+{
+    int i=0;
+    FILE *fp;
+    if((fp=fopen("shanchu.txt","r"))==NULL)
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        exit(0);
+    }
+    while(!feof(fp))
+    {
+        fscanf(fp,"%s",shanchu[i]);
+        i++;
+    }
+    shanchugeshu=i;
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        exit(0);
+    }
+}
+int shanchufeng(char *dc)
+{
+    int i;
+    for(i=0;i<shanchugeshu;i++)
+    {
+        if(strcmp(dc,shanchu[i])==0)
+        {
+            return 1;
+        }
+    }
+    if(dc[0]=='\0')
+    {
+        return 1;
+    }
+    if(strstr(dc,"　")!=NULL)//大空格
+    {
+        return 1;
+    }
+    for(i=0;dc[i]!='\0';i++)
+    {
+        if(dc[i]==' ')
+        {
+            return 1;
+        }
+        else if(dc[i]>='0'&&dc[i]<='9')
+        {
+            return 1;
+        }
+        else if(dc[i]<0)//剔除汉字
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
 void panduan(char *dc)
 {
     int i;
+    if(shanchufeng(dc))
+    {
+        return ;
+    }
     for(i=0;i<gs;i++)
     {
         if(strcmp(du[i].p,dc)==0)
@@ -48,7 +109,7 @@ void panduan(char *dc)
         }
     }
     strcpy(du[gs].p,dc);
-    du[gs].wz=0;du[gs++].zg=0;
+    du[gs].wz=1;du[gs++].zg=0;
 }
 void duruzongshu()
 {
@@ -202,6 +263,7 @@ void tianjia()
     char cy[300],dc[50];
     char xz1;
     FILE *fp;
+    shanchuzong();
     gs=0;
     if((fp=fopen("wenzhang.txt","r"))==NULL)
     {
@@ -408,7 +470,7 @@ void fuzhu()
 int main()
 {
     int xz1,xz2;
-    printf("*****************************************\n\n\n\n\n\n       欢迎使用词数统计程序 V1.3\n\n\n\n\n\n*****************************************\n\n");
+    printf("*****************************************\n\n\n\n\n\n       欢迎使用词数统计程序 V1.4\n\n\n\n\n\n*****************************************\n\n");
     while(1)
     {
         printf("\n1.添加新文章\n2.查看汇总数据\n3.联系我们\n4.退出程序\n\n请选择：");
@@ -477,11 +539,10 @@ int main()
         else if(xz1==3)
         {
             printf("\n程序名称：单词个数统计程序\n");
-            printf("程序版本：V1.3\n");
-            printf("内核版本：V1.0（基于优化）\n");
-            printf("内核设计时间：2014/7/28\n");
+            printf("程序版本：V1.4\n");
+            printf("内核版本：V1.4（基于优化V1.0）\n");
             printf("初次开发时间：2014/7/30\n");
-            printf("最后更新时间：2014/9/27\n");
+            printf("最后更新时间：2014/9/28\n");
             printf("开发语言：C/C++\n");
             printf("开发所属：AEM工程\n");
             printf("开发者  ：Beifeng\n");
