@@ -4,15 +4,17 @@
 #include<cstring>
 #include<cmath>
 #include<cctype>
+#include<ctime>
 using namespace std;
 struct stu
 {
     char p[50];
     int wz;
     int zg;
+    double qfb;
 }du[50000],zu[800000];
 char shanchu[10000][30];
-int gs,k,shanchugeshu;
+int gs,k,shanchugeshu,flag1=0,flag2=0,flag3=0;
 int wzsx(const void *a,const void *b)
 {
     return(*(struct stu*)a).wz>(*(struct stu*)b).wz?1:-1;
@@ -122,9 +124,12 @@ void duruzongshu()
     k=0;
     while(!feof(fp))
     {
-        fscanf(fp,"%s%d",zu[k].p,&zu[k].zg);
+        fscanf(fp,"  %s%d%lf",zu[k].p,&zu[k].zg,&zu[k].qfb);
         zu[k].wz=0;
-        k++;
+        if(!shanchufeng(zu[k].p))
+        {
+            k++;
+        }
     }
     if(fclose(fp))
     {
@@ -150,7 +155,8 @@ void chajieguo(int fl)
          {
              if(du[i].wz>=xx&&du[i].wz<=sx)
              {
-                  printf("  %-20s    %5d        %.2lf\n",du[i].p,du[i].wz,du[i].wz*1000.0/zgs);
+                du[i].qfb=du[i].wz*1000.0/zgs;
+                printf("  %-20s    %5d        %.2lf\n",du[i].p,du[i].wz,du[i].qfb);
              }
          }
          printf("\n已输出所有符合条件的单词\n");
@@ -170,7 +176,8 @@ void chajieguo(int fl)
         {
             if(zu[i].zg>=xx&&zu[i].zg<=sx)
             {
-                printf("  %-20s    %5d        %.2lf\n",zu[i].p,zu[i].zg,zu[i].zg*1000.0/zgs);
+                zu[i].qfb=zu[i].zg*1000.0/zgs;
+                printf("  %-20s    %5d        %.2lf\n",zu[i].p,zu[i].zg,zu[i].qfb);
             }
         }
         printf("\n已输出所有符合条件的单词\n");
@@ -189,7 +196,7 @@ void cundang(int fl)
         }
         for(i=0;i<gs;i++)
         {
-            fprintf(fp,"%s %d\n",du[i].p,du[i].wz);
+            fprintf(fp,"  %-20s    %5d        %.2lf\n",du[i].p,du[i].wz,du[i].qfb);
         }
         if(fclose(fp))
         {
@@ -206,7 +213,10 @@ void cundang(int fl)
         }
         for(i=0;i<k;i++)
         {
-            fprintf(fp,"%s %d\n",zu[i].p,zu[i].zg);
+            if(!shanchufeng(zu[i].p))
+            {
+                fprintf(fp,"  %-20s    %5d        %.2lf\n",zu[i].p,zu[i].zg,zu[i].qfb);
+            }
         }
         if(fclose(fp))
         {
@@ -217,7 +227,7 @@ void cundang(int fl)
 }
 void hebin()
 {
-    int i,j,flag;
+    int i,j,flag,zgs;
     FILE *fp;
     if((fp=fopen("zongshu.txt","r"))==NULL)
     {
@@ -227,7 +237,7 @@ void hebin()
     k=0;
     while(!feof(fp))
     {
-        fscanf(fp,"%s%d",zu[k].p,&zu[k].zg);
+        fscanf(fp,"  %s%d%lf",zu[k].p,&zu[k].zg,&zu[k].qfb);
         zu[k].wz=0;
         k++;
     }
@@ -250,6 +260,14 @@ void hebin()
             zu[k++].zg=du[i].wz;
         }
     }
+    for(zgs=0,i=0;i<k;i++)
+    {
+        zgs+=zu[i].zg;
+    }
+    for(i=0;i<k;i++)
+    {
+        zu[i].qfb=zu[i].zg*1000.0/zgs;
+    }
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
@@ -263,7 +281,6 @@ void tianjia()
     char cy[300],dc[50];
     char xz1;
     FILE *fp;
-    shanchuzong();
     gs=0;
     if((fp=fopen("wenzhang.txt","r"))==NULL)
     {
@@ -450,11 +467,27 @@ void fuzhu()
         }
         else if(xz1==2)
         {
-            cundang(1);
+            if(flag2==0)
+            {
+                cundang(1);
+                flag2=1;
+            }
+            else
+            {
+                printf("\n对不起，您刚刚执行过了存档操作\n故本次操作已禁止\n");
+            }
         }
         else if(xz1==3)
         {
-            hebin();
+            if(flag1==0)
+            {
+                hebin();
+                flag1=1;
+            }
+            else
+            {
+                printf("\n对不起，您刚刚执行过了合并操作\n一篇文章只能与原有数据合并一次，故本次操作已禁止\n");
+            }
         }
         else if(xz1==4)
         {
@@ -470,7 +503,8 @@ void fuzhu()
 int main()
 {
     int xz1,xz2;
-    printf("*****************************************\n\n\n\n\n\n       欢迎使用词数统计程序 V1.4\n\n\n\n\n\n*****************************************\n\n");
+    printf("*****************************************\n\n\n\n\n\n\n       欢迎使用词数统计程序  V1.6\n\n\n\n\n\n\n*****************************************\n\n");
+    shanchuzong();
     while(1)
     {
         printf("\n1.添加新文章\n2.查看汇总数据\n3.联系我们\n4.退出程序\n\n请选择：");
@@ -483,7 +517,15 @@ int main()
                 scanf("%d",&xz2);
                 if(xz2==1)
                 {
-                    tianjia();
+                    if(flag3==0)
+                    {
+                        tianjia();
+                        flag3=1;
+                    }
+                    else
+                    {
+                        printf("\n对不起，您刚刚执行过了添加操作\n故本次操作已禁止\n");
+                    }
                 }
                 else if(xz2==2)
                 {
@@ -538,11 +580,20 @@ int main()
         }
         else if(xz1==3)
         {
+            char time[20],day[10],month[10],year[10];
+            _strdate(time);
+            day[0]=time[3];day[1]=time[4];day[2]='\0';
+            month[0]=time[0];month[1]=time[1];month[2]='\0';
+            year[0]='2';year[1]='0';year[2]=time[6];year[3]=time[7];year[4]='\0';
+            _strtime(time);
             printf("\n程序名称：单词个数统计程序\n");
-            printf("程序版本：V1.4\n");
+            printf("程序版本：V1.6\n");
             printf("内核版本：V1.4（基于优化V1.0）\n");
-            printf("初次开发时间：2014/7/30\n");
-            printf("最后更新时间：2014/9/28\n");
+            printf("迭代次数：7\n");
+            printf("初次开发日期：2014/07/30\n");
+            printf("最后更新日期：2014/09/30\n");
+            printf("系统当前日期：%s/%s/%s\n",year,month,day);
+            printf("系统当前时间：%s\n",time);
             printf("开发语言：C/C++\n");
             printf("开发所属：AEM工程\n");
             printf("开发者  ：Beifeng\n");
