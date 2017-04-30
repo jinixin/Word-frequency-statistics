@@ -8,12 +8,12 @@
 using namespace std;
 struct stu
 {
-    char p[30];
+    char p[50];
     int cs;
     double qfb;
     int bj;//该单词出现的篇数-是否高频,是否重点
-}du[50000],zu[900000];
-char shanchu[20000][20];
+}du[100000],zu[1000000];
+char shanchu[100000][20];
 int gs,k,shanchugeshu,wzzs,flag1=0,flag2=0,flag3=0;
 int wzsx(const void *a,const void *b)
 {
@@ -92,6 +92,10 @@ int shanchufeng(char *dc)
         {
             return 1;
         }
+        else if(isupper(dc[i]))
+        {
+            return 1;//大写字母（大多是人名）
+        }
     }
     return 0;
 }
@@ -117,7 +121,7 @@ void panduan(char *dc)
 void duruzongshu()
 {
     FILE *fp;
-    if((fp=fopen("system.txt","r"))==NULL)
+    if((fp=fopen("amain(system).in","r"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
         exit(0);
@@ -128,7 +132,7 @@ void duruzongshu()
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
         exit(0);
     }
-    if((fp=fopen("zongshu(system).txt","r"))==NULL)
+    if((fp=fopen("bzong(system).out","r"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
         exit(0);
@@ -151,18 +155,18 @@ void duruzongshu()
 void chajieguo(int fl)
 {
     int i,zgs;
-    char q[20];
+    char q[50];
     if(fl==1)
     {
          for(zgs=0,i=0;i<gs;i++)
          {
              zgs+=du[i].cs;
          }
-         printf("\n  单词                   本文次数    千分比（占本篇文章）\n");
+         printf("\n  单词                 本文出现次数    千分比（占本篇文章）\n");
          for(i=0;i<gs;i++)
          {
              du[i].qfb=du[i].cs*1000.0/zgs;
-             printf("  %-20s    %5d        %.2lf\n",du[i].p,du[i].cs,du[i].qfb);
+             printf("  %-20s    %5d        %8.2lf\n",du[i].p,du[i].cs,du[i].qfb);
          }
          printf("\n已输出所有符合条件的单词\n");
     }
@@ -172,7 +176,7 @@ void chajieguo(int fl)
         {
             zgs+=zu[i].cs;
         }
-        printf("\n  单词                   总共次数    千分比（占总共次数）\n");
+        printf("\n  单词                 总共出现次数    千分比（占所有文章）\n");
         for(i=0;i<k;i++)
         {
             zu[i].qfb=zu[i].cs*1000.0/zgs;
@@ -188,15 +192,15 @@ void chajieguo(int fl)
             {
                 strcpy(q,"");
             }
-            printf("  %-20s    %5d        %8.2lf %-10s\n",zu[i].p,zu[i].cs,zu[i].qfb,q);
+            printf("  %-20s    %5d        %8.2lf %15s\n",zu[i].p,zu[i].cs,zu[i].qfb,q);
         }
         printf("\n已输出所有符合条件的单词\n");
     }
 }
 void cundang(int fl)
 {
-    int i;
-    char q[20];
+    int i,zgs;
+    char q[50];
     FILE *fp;
     if(fl==1)
     {
@@ -205,9 +209,15 @@ void cundang(int fl)
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
             exit(0);
         }
+        for(zgs=0,i=0;i<gs;i++)
+        {
+            zgs+=du[i].cs;
+        }
+        fprintf(fp,"\n  单词                 本文出现次数    千分比（占本篇文章）\n");
         for(i=0;i<gs;i++)
         {
-            fprintf(fp,"  %-20s    %5d        %.2lf\n",du[i].p,du[i].cs,du[i].qfb);
+            du[i].qfb=du[i].cs*1000.0/zgs;
+            fprintf(fp,"  %-20s    %5d        %8.2lf\n",du[i].p,du[i].cs,du[i].qfb);
         }
         if(fclose(fp))
         {
@@ -217,18 +227,7 @@ void cundang(int fl)
     }
     else if(fl==2)
     {
-        if((fp=fopen("system.txt","r"))==NULL)
-        {
-            printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
-            exit(0);
-        }
-        fscanf(fp,"%d",&wzzs);
-        if(fclose(fp))
-        {
-            printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
-            exit(0);
-        }
-        if((fp=fopen("system.txt","w"))==NULL)
+        if((fp=fopen("amain(system).in","w"))==NULL)
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
             exit(0);
@@ -239,7 +238,7 @@ void cundang(int fl)
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
             exit(0);
         }
-        if((fp=fopen("zongshu(system).txt","w"))==NULL)
+        if((fp=fopen("bzong(system).out","w"))==NULL)
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
             exit(0);
@@ -261,6 +260,7 @@ void cundang(int fl)
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
             exit(0);
         }
+        fprintf(fp,"\n  单词                 总共出现次数    千分比（占所有文章）\n");
         for(i=0;i<k;i++)
         {
             if(!shanchufeng(zu[i].p))
@@ -277,7 +277,7 @@ void cundang(int fl)
                 {
                     strcpy(q,"");
                 }
-                fprintf(fp,"  %-20s    %5d        %8.2lf %-10s\n",zu[i].p,zu[i].cs,zu[i].qfb,q);
+                fprintf(fp,"  %-20s    %5d        %8.2lf %15s\n",zu[i].p,zu[i].cs,zu[i].qfb,q);
             }
         }
         if(fclose(fp))
@@ -324,8 +324,7 @@ void hebin()
 void tianjia()
 {
     int i,j;
-    char cy[500],dc[30];
-    char xz1;
+    char cy[1000],dc[50];
     FILE *fp;
     gs=0;
     if((fp=fopen("新文章.txt","r"))==NULL)
@@ -347,11 +346,6 @@ void tianjia()
                     j=0;
                 }
             }
-            else if(isupper(cy[i]))
-            {
-                dc[j]=cy[i]+32;
-                j++;
-            }
             else if(cy[i]=='\0')
             {
                 dc[j]='\0';
@@ -370,31 +364,14 @@ void tianjia()
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
         exit(0);
     }
-    loop1:printf("\n文章已添加完成\n\n是否现在显示单词分类结果，请选择y/n：");
-    getchar();
-    scanf("%c",&xz1);
-    if(xz1=='y')
-    {
-         chajieguo(1);
-    }
-    else if(xz1=='n')
-    {
-        printf("\n您可“返回上级”至“辅助功能”里查看本结果\n");
-        return ;
-    }
-    else
-    {
-        printf("\n对不起，您的输入非法，请您重新输入\n");
-        goto loop1;
-    }
+    printf("\n文章已添加完成\n");
 }
 void paixu(int fl)
 {
     int xz1,xz2;
-    printf("\n欢迎进入排序模块\n");
     while(1)
     {
-        printf("\n1.按次数顺序\n2.按字母顺序\n3.返回上级\n\n请选择：");
+        printf("\n1.按次数顺序\n2.按字母顺序\n0.返回上级\n\n请选择：");
         scanf("%d",&xz1);
         if(xz1==1)
         {
@@ -405,10 +382,12 @@ void paixu(int fl)
                 if(fl==1)
                 {
                     qsort(du,gs,sizeof(struct stu),wzsx);
+                    printf("\n对新文章单词的上升排序已完成\n您可至“查看结果”选项中查看\n");
                 }
                 else if(fl==2)
                 {
                     qsort(zu,k,sizeof(struct stu),zgsx);
+                    printf("\n对所有文章单词的上升排序已完成\n您可至“查看结果”选项中查看\n");
                 }
             }
             else if(xz2==2)
@@ -416,10 +395,12 @@ void paixu(int fl)
                 if(fl==1)
                 {
                     qsort(du,gs,sizeof(struct stu),wzjx);
+                    printf("\n对新文章单词的下降排序已完成\n您可至“查看结果”选项中查看\n");
                 }
                 else if(fl==2)
                 {
                     qsort(zu,k,sizeof(struct stu),zgjx);
+                    printf("\n对所有文章单词的下降排序已完成\n您可至“查看结果”选项中查看\n");
                 }
             }
             else
@@ -433,15 +414,16 @@ void paixu(int fl)
             if(fl==1)
             {
                 qsort(du,gs,sizeof(struct stu),zdx);
+                printf("\n对新文章单词的字典序排序已完成\n您可至“查看结果”选项中查看\n");
             }
             else if(fl==2)
             {
                 qsort(zu,k,sizeof(struct stu),zdx);
+                printf("\n对所有文章单词的字典序排序已完成\n您可至“查看结果”选项中查看\n");
             }
         }
-        else if(xz1==3)
+        else if(xz1==0)
         {
-            printf("\n已经为您退出排序模块\n");
             return ;
         }
         else
@@ -452,114 +434,49 @@ void paixu(int fl)
 }
 void sousuo(int fl)
 {
-    int xz1,i;
+    int i;
     char dc[50];
-    printf("\n欢迎进入数据搜索模块\n");
-    while(1)
+    printf("\n请输入所要查询的单词：");
+    scanf("%s",dc);
+    if(fl==1)
     {
-         printf("\n1.搜索单词\n2.返回上级\n\n请选择：");
-         scanf("%d",&xz1);
-         if(xz1==1)
-         {
-             printf("\n请输入所要查询的单词：");
-             scanf("%s",dc);
-             if(fl==1)
-             {
-                 printf("\n  单词     本文中出现次数\n");
-                 for(i=0;i<gs;i++)
-                 {
-                     if(strcmp(du[i].p,dc)==0)
-                     {
-                         printf("%s %d\n",du[i].p,du[i].cs);
-                         break;
-                     }
-                 }
-             }
-             else if(fl==2)
-             {
-                 printf("\n  单词     总共出现次数\n");
-                 for(i=0;i<k;i++)
-                 {
-                     if(strcmp(zu[i].p,dc)==0)
-                     {
-                         printf("%s %d\n",zu[i].p,zu[i].cs);
-                         break;
-                     }
-                 }
-             }
-         }
-         else if(xz1==2)
-         {
-             printf("\n已经为您退出数据搜索模块\n");
-             return ;
-         }
-         else
-         {
-             printf("\n对不起，您的输入非法，请您重新输入\n");
-         }
+        printf("\n  单词     本文中出现次数\n");
+        for(i=0;i<gs;i++)
+        {
+            if(strcmp(du[i].p,dc)==0)
+            {
+                printf("  %s        %d\n",du[i].p,du[i].cs);
+                break;
+            }
+        }
     }
-}
-void fuzhu()
-{
-    int xz1;
-    printf("\n欢迎进入辅助功能模块\n");
-    while(1)
+    else if(fl==2)
     {
-        printf("\n1.查看结果\n2.将数据存档\n3.和原有数据合并\n4.返回上级\n\n请选择：");
-        scanf("%d",&xz1);
-        if(xz1==1)
+        printf("\n  单词     总共出现次数\n");
+        for(i=0;i<k;i++)
         {
-            chajieguo(1);
-        }
-        else if(xz1==2)
-        {
-            if(flag2==0)
+            if(strcmp(zu[i].p,dc)==0)
             {
-                cundang(1);
-                flag2=1;
+                printf("  %s        %d\n",zu[i].p,zu[i].cs);
+                break;
             }
-            else
-            {
-                printf("\n对不起，您刚刚执行过了存档操作\n故本次操作已禁止\n");
-            }
-        }
-        else if(xz1==3)
-        {
-            if(flag1==0)
-            {
-                hebin();
-                flag1=1;
-            }
-            else
-            {
-                printf("\n对不起，您刚刚执行过了合并操作\n一篇文章只能与原有数据合并一次，故本次操作已禁止\n");
-            }
-        }
-        else if(xz1==4)
-        {
-            printf("\n已经为您退出辅助功能模块\n");
-            return ;
-        }
-        else
-        {
-            printf("\n对不起，您的输入非法，请您重新输入\n");
         }
     }
 }
 int main()
 {
     int xz1,xz2;
-    printf("*****************************************\n\n\n\n\n\n\n       欢迎使用词数统计程序  V1.7\n\n\n\n\n\n\n*****************************************\n\n");
+    printf("**********************************************\n\n\n\n\n\n\n          欢迎使用词数统计程序  V1.8\n\n\n\n\n\n\n**********************************************\n\n");
     shanchuzong();
     while(1)
     {
-        printf("\n1.添加新文章\n2.查看汇总数据\n3.联系我们\n4.退出程序\n\n请选择：");
+        printf("\n1.添加新的文章\n2.处理汇总数据\n3.联系我们\n4.退出程序\n\n请选择：");
         scanf("%d",&xz1);
         if(xz1==1)
         {
             while(1)
             {
-                printf("\n1.开始添加\n2.排序单词\n3.搜索单词\n4.辅助功能\n5.返回上级\n\n请选择：");
+                printf("\n1.开始添加\n2.查看结果\n3.排序单词\n4.搜索单词\n5.保存结果\n6.和原有数据合并\n0.返回上级\n\n请选择：");
                 scanf("%d",&xz2);
                 if(xz2==1)
                 {
@@ -575,17 +492,41 @@ int main()
                 }
                 else if(xz2==2)
                 {
-                    paixu(1);
+                    chajieguo(1);
                 }
                 else if(xz2==3)
                 {
-                    sousuo(1);
+                    paixu(1);
                 }
                 else if(xz2==4)
                 {
-                    fuzhu();
+                    sousuo(1);
                 }
                 else if(xz2==5)
+                {
+                    if(flag2==0)
+                    {
+                        cundang(1);
+                        flag2=1;
+                    }
+                    else
+                    {
+                        printf("\n对不起，您刚刚执行过了存档操作\n故本次操作已禁止\n");
+                    }
+                }
+                else if(xz2==6)
+                {
+                    if(flag1==0)
+                    {
+                        hebin();
+                        flag1=1;
+                    }
+                    else
+                    {
+                        printf("\n对不起，您刚刚执行过了合并操作\n一篇文章只能与原有数据合并一次，故本次操作已禁止\n");
+                    }
+                }
+                else if(xz2==0)
                 {
                     break;
                 }
@@ -600,21 +541,21 @@ int main()
             duruzongshu();
             while(1)
             {
-                printf("\n1.查看结果\n2.排序单词\n3.搜索单词\n4.返回上级\n\n请选择：");
+                printf("\n2.查看结果\n3.排序单词\n4.搜索单词\n0.返回上级\n\n请选择：");
                 scanf("%d",&xz2);
-                if(xz2==1)
+                if(xz2==2)
                 {
                     chajieguo(2);
                 }
-                else if(xz2==2)
+                else if(xz2==3)
                 {
                     paixu(2);
                 }
-                else if(xz2==3)
+                else if(xz2==4)
                 {
                     sousuo(2);
                 }
-                else if(xz2==4)
+                else if(xz2==0)
                 {
                     break;
                 }
@@ -633,9 +574,9 @@ int main()
             year[0]='2';year[1]='0';year[2]=time[6];year[3]=time[7];year[4]='\0';
             _strtime(time);
             printf("\n程序名称：单词个数统计程序\n");
-            printf("程序版本：V1.7\n");
+            printf("程序版本：V1.8\n");
             printf("内核版本：V1.4（基于优化V1.0）\n");
-            printf("迭代次数：8\n");
+            printf("迭代次数：9\n");
             printf("初次开发日期：2014/07/30\n");
             printf("最后更新日期：2014/10/01\n");
             printf("系统当前日期：%s/%s/%s\n",year,month,day);
@@ -647,7 +588,7 @@ int main()
         }
         else if(xz1==4)
         {
-            printf("\n已经为您安全退出程序\n\n请您按任意键退出本对话框\n");
+            printf("\n感谢您的使用，已经为您安全退出程序\n\n请您按任意键退出本对话框\n");
             break;
         }
         else
