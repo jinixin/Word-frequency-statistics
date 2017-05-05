@@ -46,6 +46,7 @@ void shanchuzong()
     if((fp=fopen("这些单词不统计.txt","r"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
         exit(0);
     }
     while(!feof(fp))
@@ -57,6 +58,7 @@ void shanchuzong()
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
         exit(0);
     }
 }
@@ -124,17 +126,23 @@ void duruzongshu()
     if((fp=fopen("amain(system).in","r"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     fscanf(fp,"%d",&wzzs);
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if((fp=fopen("bzong(system).out","r"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     k=0;
@@ -149,6 +157,8 @@ void duruzongshu()
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
 }
@@ -160,12 +170,16 @@ int durupanduan(int n)
     if((fp=fopen("calrea(system).in","r"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     fscanf(fp,"%s%d",q,&t);
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     qsort(du,gs,sizeof(struct stu),zdx);
@@ -178,12 +192,16 @@ int durupanduan(int n)
         if((fp=fopen("calrea(system).in","w"))==NULL)
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
         fprintf(fp,"%s %d",du[gs-1].p,gs);
         if(fclose(fp))
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
     }
@@ -212,11 +230,11 @@ void chajieguo(int fl)
         {
             if(wzzs>3)
             {
-                if(zu[i].bj*2>wzzs)
+                if(zu[i].bj*3>wzzs)
                 {
                     strcpy(q,"超高频");
                 }
-                else if(zu[i].bj*3>wzzs)
+                else if(zu[i].bj*4>wzzs)
                 {
                     strcpy(q,"高频");
                 }
@@ -245,6 +263,8 @@ void cundang(int fl)
         if((fp=fopen("新文章单词数.txt","w"))==NULL)
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
         fprintf(fp,"\n  ********************************************************\n");
@@ -258,6 +278,8 @@ void cundang(int fl)
         if(fclose(fp))
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
     }
@@ -266,6 +288,8 @@ void cundang(int fl)
         if((fp=fopen("bzong(system).out","w"))==NULL)
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
         for(i=0;i<k;i++)
@@ -278,11 +302,15 @@ void cundang(int fl)
         if(fclose(fp))
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
         if((fp=fopen("所有文章单词数.txt","w"))==NULL)
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
         fprintf(fp,"\n  ********************************************************\n");
@@ -293,11 +321,11 @@ void cundang(int fl)
             {
                 if(wzzs>3)
                 {
-                    if(zu[i].bj*2>wzzs)
+                    if(zu[i].bj*3>wzzs)
                     {
                         strcpy(q,"超高频");
                     }
-                    else if(zu[i].bj*3>wzzs)
+                    else if(zu[i].bj*4>wzzs)
                     {
                         strcpy(q,"高频");
                     }
@@ -318,6 +346,8 @@ void cundang(int fl)
         if(fclose(fp))
         {
             printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+            getchar();
+            getchar();
             exit(0);
         }
     }
@@ -351,12 +381,16 @@ void hebin()
     if((fp=fopen("amain(system).in","w"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     fprintf(fp,"%d",wzzs+1);
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     for(zgs=0,i=0;i<k;i++)
@@ -378,6 +412,8 @@ void tianjia()
     if((fp=fopen("新文章.txt","r"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     while(!feof(fp))
@@ -410,6 +446,8 @@ void tianjia()
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     for(zgs=0,i=0;i<gs;i++)
@@ -526,11 +564,11 @@ void sousuo(int fl)
                 printf("\n  单词                 总共出现次数    千分比（占所有文章）\n");
                 if(wzzs>3)
                 {
-                    if(zu[i].bj*2>wzzs)
+                    if(zu[i].bj*3>wzzs)
                     {
                         strcpy(q,"超高频");
                     }
-                    else if(zu[i].bj*3>wzzs)
+                    else if(zu[i].bj*4>wzzs)
                     {
                         strcpy(q,"高频");
                     }
@@ -559,72 +597,97 @@ void chushihua()
     if((fp=fopen("amain(system).in","w"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     fprintf(fp,"0");
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if((fp=fopen("bzong(system).out","w"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if((fp=fopen("calrea(system).in","w"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     fprintf(fp,"a 0");
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if((fp=fopen("所有文章单词数.txt","w"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if((fp=fopen("新文章.txt","w"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if((fp=fopen("新文章单词数.txt","w"))==NULL)
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
     if(fclose(fp))
     {
         printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
         exit(0);
     }
+    k=gs=0;
     printf("\n******初始化程序（删除所有数据）成功******\n");
     printf("\n******在此自动为您返回上级******\n");
 }
 int main()
 {
-    int xz1,xz2;
-    printf("**********************************************\n\n\n\n\n\n\n          欢迎使用词数统计程序  V2.2\n\n\n\n\n\n\n**********************************************\n\n");
+    int xz1,xz2,flag1;
+    printf("**********************************************\n\n\n\n\n\n\n          欢迎使用词数统计程序  V2.3\n\n\n\n\n\n\n**********************************************\n\n");
     shanchuzong();
     while(1)
     {
@@ -676,7 +739,7 @@ int main()
                     {
                         hebin();
                         printf("\n******和原有数据合并成功******\n");
-                        printf("\n合并后本篇文章在原有数据基础上新增了%d个有效单词\n",xz);
+                        printf("\n合并本篇文章后所有数据在原有数据基础上新增了%d个有效单词\n",xz);
                     }
                     else
                     {
@@ -738,6 +801,7 @@ int main()
             printf("\n************************\n一键添加将为您完成“添加新文章”，“保存结果”，“打印结果”操作\n此外您还可以选择是否进行“和原有数据合并”的操作\n\t\t\t\t\t************************\n");
             loop1:printf("\n1.和原有数据合并\n2.不和原有数据合并\n0.返回上级\n\n请选择：");
             scanf("%d",&xz2);
+            flag1=0;
             if(xz2==1||xz2==2)
             {
                 tianjia();
@@ -757,7 +821,7 @@ int main()
                     {
                         hebin();
                         printf("\n******和原有数据合并成功******\n");
-                        printf("\n合并后本篇文章在原有数据基础上新增了%d个有效单词\n",xz);
+                        flag1=1;
                     }
                     else
                     {
@@ -768,6 +832,10 @@ int main()
                     }
                 }
                 chajieguo(1);
+                if(flag1==1)
+                {
+                    printf("\n  合并本篇文章后所有数据在原有数据基础上新增了%d个有效单词\n",xz);
+                }
                 printf("\n******一键添加成功******\n");
                 printf("\n******在此自动为您返回上级******\n");
             }
@@ -791,23 +859,25 @@ int main()
             _strtime(time);
             printf("\n******************************************************\n");
             printf("程序名称    ：单词个数统计程序\n");
-            printf("程序版本    ：V2.2\n");
+            printf("程序版本    ：V2.3\n");
             printf("内核版本    ：V1.4（基于优化V1.0）\n");
-            printf("迭代次数    ：13\n");
+            printf("迭代次数    ：14\n");
             printf("开发语言    ：C/C++\n");
             printf("开发所属    ：AEM 工程\n");
             printf("开发者      ：Bei feng\n");
             printf("系统当前时间：%s\n",time);
             printf("系统当前日期：%s/%s/%s\n",year,month,day);
             printf("初次开发日期：2014/07/30\n");
-            printf("最后更新日期：2014/10/04\n");
+            printf("最后更新日期：2014/10/07\n");
             printf("**********************************\n");
-            printf("\n如有任何改进意见，请联系我们：jinixinwork@sina.com\n");
+            printf("\n如有任何改进意见，请联系我们：beifengwork@sina.com\n");
             printf("\n******************************************************\n");
         }
         else if(xz1==5)
         {
             printf("\n感谢您的使用，已经为您安全退出程序\n\n******请您按任意键退出本对话框******\n");
+            getchar();
+            getchar();
             break;
         }
         else
