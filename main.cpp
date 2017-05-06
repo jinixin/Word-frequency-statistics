@@ -684,10 +684,166 @@ void chushihua()
     printf("\n******初始化程序（删除所有数据）成功******\n");
     printf("\n******在此自动为您返回上级******\n");
 }
+int jihuoriqi()
+{
+    FILE *fp;
+    int y,m,d,fh;
+    char time[20],day[20],month[20],year[20],jihuo[10];
+    if((fp=fopen("djhrq(system).out","r"))==NULL)
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    fscanf(fp,"%d %d %d",&y,&m,&d);
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if(y==1&&m==1&&d==1)
+    {
+        fh=1;
+    }
+    else if(y==0&&m==0&&d==0)
+    {
+        printf("\n  您好，我们检测到您的程序尚未激活\n  请您在此输入永久激活码或试用码：");
+        scanf("%s",jihuo);
+        if(strcmp(jihuo,"ASDFGQ")==0)
+        {
+            printf("\n******已为您永久激活程序，感谢您的使用******\n");
+            if((fp=fopen("djhrq(system).out","w"))==NULL)
+            {
+                printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+                getchar();
+                getchar();
+                exit(0);
+            }
+            fprintf(fp,"1 1 1\n");
+            if(fclose(fp))
+            {
+                printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+                getchar();
+                getchar();
+                exit(0);
+            }
+            fh=1;
+        }
+        else if(strcmp(jihuo,"ZXCVBP")==0)
+        {
+            printf("\n******您输入的是30天试用码，感谢您的使用******\n");
+            _strdate(time);
+            day[0]=time[3];day[1]=time[4];day[2]='\0';
+            month[0]=time[0];month[1]=time[1];month[2]='\0';
+            year[0]='2';year[1]='0';year[2]=time[6];year[3]=time[7];year[4]='\0';
+            if(strcmp(month,"12")==0)
+            {
+                strcpy(month,"01");
+                if(year[2]=='9')
+                {
+                    year[1]++;
+                    year[2]='0';
+                }
+                else
+                {
+                    year[2]++;
+                }
+            }
+            else if(strcmp(month,"09")==0)
+            {
+                strcpy(month,"10");
+            }
+            else
+            {
+                month[1]++;
+            }
+            if((fp=fopen("djhrq(system).out","w"))==NULL)
+            {
+                printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+                getchar();
+                getchar();
+                exit(0);
+            }
+            fprintf(fp,"%s %s %s\n",year,month,day);
+            if(fclose(fp))
+            {
+                printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+                getchar();
+                getchar();
+                exit(0);
+            }
+            fh=1;
+        }
+        else
+        {
+            printf("\n对不起，您输入的激活码或试用码有误\n我们建议您联系：beifengwork@sina.com\n");
+            fh=0;
+        }
+    }
+    else
+    {
+        _strdate(time);
+        day[0]=time[3];day[1]=time[4];day[2]='\0';
+        month[0]=time[0];month[1]=time[1];month[2]='\0';
+        year[0]='2';year[1]='0';year[2]=time[6];year[3]=time[7];year[4]='\0';
+        strcat(year,month);
+        strcat(year,day);
+        puts(year);
+        sprintf(month,"%d",y);
+        sprintf(day,"%d",m);
+        strcat(month,day);
+        sprintf(day,"%d",d);
+        strcat(month,day);
+        if(strcmp(month,year)<0)
+        {
+            printf("\n******对不起，您的试用期已过******\n如您想继续使用，我们建议您输入永久激活码：");
+            scanf("%s",jihuo);
+            if(strcmp(jihuo,"ASDFGQ")==0)
+            {
+                printf("\n******已为您永久激活程序，感谢您的使用******\n");
+                if((fp=fopen("djhrq(system).out","w"))==NULL)
+                {
+                    printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+                    getchar();
+                    getchar();
+                    exit(0);
+                }
+                fprintf(fp,"1 1 1\n");
+                if(fclose(fp))
+                {
+                    printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+                    getchar();
+                    getchar();
+                    exit(0);
+                }
+                fh=1;
+            }
+            else
+            {
+                printf("\n对不起，您输入的激活码有误\n我们建议您联系：beifengwork@sina.com\n");
+                fh=0;
+            }
+        }
+        else
+        {
+            fh=1;
+        }
+    }
+    return fh;
+}
 int main()
 {
-    int xz1,xz2,flag1;
-    printf("**********************************************\n\n\n\n\n\n\n          欢迎使用词数统计程序  V2.3\n\n\n\n\n\n\n**********************************************\n\n");
+    int xz1,xz2,flag1,pd;
+    pd=jihuoriqi();
+    if(!pd)
+    {
+        printf("\n如有不便，请您谅解\n在此自动为您退出程序");
+        goto loop2;
+    }
+    printf("**********************************************\n\n\n\n\n\n\n          欢迎使用词数统计程序  V2.4\n\n\n\n\n\n\n**********************************************\n\n");
     shanchuzong();
     while(1)
     {
@@ -859,23 +1015,23 @@ int main()
             _strtime(time);
             printf("\n******************************************************\n");
             printf("程序名称    ：单词个数统计程序\n");
-            printf("程序版本    ：V2.3\n");
+            printf("程序版本    ：V2.4\n");
             printf("内核版本    ：V1.4（基于优化V1.0）\n");
-            printf("迭代次数    ：14\n");
+            printf("迭代次数    ：15\n");
             printf("开发语言    ：C/C++\n");
             printf("开发所属    ：AEM 工程\n");
             printf("开发者      ：Bei feng\n");
             printf("系统当前时间：%s\n",time);
             printf("系统当前日期：%s/%s/%s\n",year,month,day);
             printf("初次开发日期：2014/07/30\n");
-            printf("最后更新日期：2014/10/07\n");
+            printf("最后更新日期：2014/10/10\n");
             printf("**********************************\n");
             printf("\n如有任何改进意见，请联系我们：beifengwork@sina.com\n");
             printf("\n******************************************************\n");
         }
         else if(xz1==5)
         {
-            printf("\n感谢您的使用，已经为您安全退出程序\n\n******请您按任意键退出本对话框******\n");
+            loop2:printf("\n感谢您的使用，已经为您安全退出程序\n\n******请您按任意键退出本对话框******\n");
             getchar();
             getchar();
             break;
