@@ -5,6 +5,7 @@
 #include<cmath>
 #include<cctype>
 #include<ctime>
+#include<windows.h>//屏幕缓冲区大小
 using namespace std;
 struct stu
 {
@@ -38,6 +39,10 @@ int zdx(const void *a,const void *b)
     else
        return -1;
     return 0;
+}
+int tbsx(const void *a,const void *b)
+{
+    return(*(struct stu*)a).bj<(*(struct stu*)b).bj?1:-1;
 }
 void shanchuzong()
 {
@@ -723,20 +728,142 @@ void chushihua()
         exit(0);
     }
     k=gs=0;
-    printf("\n******初始化程序（删除所有数据）成功******\n");
+    printf("\n******初始化软件（删除所有数据）成功******\n");
     printf("\n******在此自动为您返回上级******\n");
+}
+void zwxf()
+{
+    FILE *fp;
+    if((fp=fopen("amain(system).in","r"))==NULL)
+    {
+        fp=fopen("amain(system).in","w");
+    }
+    fprintf(fp,"0");
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("bzong(system).out","r"))==NULL)
+    {
+        fp=fopen("bzong(system).out","w");
+    }
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("calrea(system).in","r"))==NULL)
+    {
+        fp=fopen("calrea(system).in","w");
+    }
+    fprintf(fp,"a 0");
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("djhrq(system).out","r"))==NULL)
+    {
+        fp=fopen("djhrq(system).out","w");
+    }
+    fprintf(fp,"1 1 1");
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("ehgsj(system).in","r"))==NULL)
+    {
+        fp=fopen("ehgsj(system).in","w");
+    }
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("所有文章单词数.txt","r"))==NULL)
+    {
+        fp=fopen("所有文章单词数.txt","w");
+    }
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("新文章.txt","r"))==NULL)
+    {
+        fp=fopen("新文章.txt","w");
+    }
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("新文章单词数.txt","r"))==NULL)
+    {
+        fp=fopen("新文章单词数.txt","w");
+    }
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    if((fp=fopen("这些单词不统计.txt","r"))==NULL)
+    {
+        fp=fopen("这些单词不统计.txt","w");
+    }
+    if(fclose(fp))
+    {
+        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n\n请您按任意键退出本对话框\n");
+        getchar();
+        getchar();
+        exit(0);
+    }
+    printf("\n******自我修复（异常处理-修复丢失的文件）成功******\n");
 }
 int jihuoriqi()
 {
     FILE *fp;
-    int y,m,d,fh;
+    int y,m,d,fh,xz;
     char time[20],day[20],month[20],year[20],jihuo[20];
     if((fp=fopen("djhrq(system).out","r"))==NULL)
     {
-        printf("\n对不起，程序发生崩溃，现已为您安全结束程序\n崩溃原因（可能）：程序共有10个文件（.exe文件不可以脱离其余9个文件单独存在）\n请您按任意键退出本对话框\n");
-        getchar();
-        //getchar();
-        exit(0);
+        printf("\n对不起，程序发生崩溃\n崩溃原因（可能）：程序共有10个文件（.exe文件不可以脱离其余9个文件单独存在）\n\n在此为您提供两种解决方案：\n\n1.自我修复（异常处理-自动修复丢失的文件）\n2.安全退出程序（您自行寻回丢失的文件）\n\n请选择：");
+        scanf("%d",&xz);
+        if(xz==1)
+        {
+            zwxf();
+            fp=fopen("djhrq(system).out","r");
+        }
+        else if(xz==2)
+        {
+            printf("\n现已为您安全结束程序，请您按任意键退出本对话框\n");
+            getchar();getchar();
+            exit(0);
+        }
+        else
+        {
+            printf("\n对不起，您的输入非法\n现已为您安全结束程序，请您按任意键退出本对话框\n");
+            getchar();getchar();
+            exit(0);
+        }
     }
     fscanf(fp,"%d %d %d",&y,&m,&d);
     if(fclose(fp))
@@ -822,7 +949,7 @@ int jihuoriqi()
         }
         else
         {
-            printf("\n对不起，您输入的激活码或试用码有误\n我们建议您联系：beifengwork@sina.com\n");
+            printf("\n对不起，您输入的激活码或试用码有误\n我们建议您联系：jixinwork@qq.com\n");
             fh=0;
         }
     }
@@ -879,7 +1006,7 @@ int jihuoriqi()
             }
             else
             {
-                printf("\n对不起，您输入的激活码有误\n我们建议您联系：beifengwork@sina.com\n");
+                printf("\n对不起，您输入的激活码有误\n我们建议您联系：jixinwork@qq.com\n");
                 fh=0;
             }
         }
@@ -899,8 +1026,8 @@ void lianxiwm(int pd)
     year[0]='2';year[1]='0';year[2]=time[6];year[3]=time[7];year[4]='\0';
     _strtime(time);
     printf("\n*********************************************************\n");
-    printf("程 序 名 称 ：单词个数统计程序\n");
-    printf("程 序 版 本 ：V2.5");
+    printf("程 序 名 称 ：英文单词频数统计软件\n");
+    printf("程 序 版 本 ：V2.6");
     if(pd==1)
     {
         printf("（ 已激活 ）\n");
@@ -910,16 +1037,16 @@ void lianxiwm(int pd)
         printf("（ 试 用 ）\n");;
     }
     printf("内 核 版 本 ：V1.4（ 基于优化V1.0 ）\n");
-    printf("迭 代 次 数 ：16\n");
+    printf("迭 代 次 数 ：17\n");
     printf("开 发 语 言 ：C/C++\n");
     printf("开 发 所 属 ：AEM 工程\n");
-    printf("开 发 者    ：Bei feng\n");
+    printf("开 发 者    ：ji xin\n");
     printf("系统当前时间：%s\n",time);
     printf("系统当前日期：%s/%s/%s\n",year,month,day);
     printf("程序开发周期：2014/07/30  至  2014/10/07\n");
-    printf("最后更新说明：V2.5/数据库优化 2014/12/05\n");
+    printf("最后更新说明：V2.6/功能优化   2015/01/22\n");
     printf("******************************************\n");
-    printf("\n程序仅作交流学习之用，严禁商业用途。如有发现，追其失责\n若有改进意见，请联系我们：beifengwork@sina.com\n");
+    printf("\n程序仅作交流学习之用，严禁商业用途。如有发现，追其失责\n若有改进意见，请联系我们：jixinwork@qq.com\n");
     printf("\n*********************************************************\n");
 }
 void huigunsj()
@@ -1001,8 +1128,39 @@ void huigunsj()
     printf("\n******回滚数据（还原到上次未合并前）成功******\n");
     printf("\n******在此自动为您返回上级******\n");
 }
+void tbfx()
+{
+    int flag[100];
+    int rd,i,r;
+    memset(flag,0,sizeof(flag));
+    qsort(zu,k,sizeof(struct stu),tbsx);
+    printf("\n图表分析如下（重要词汇及其出现的篇章频数）：\n");
+    for(i=0;i<27;)
+    {
+        rd=rand()/300;
+        if((rd>=0&&rd<90)&&(!flag[rd]))
+        {
+            flag[rd]=1;
+            i++;
+            printf("%-12s ",zu[rd].p);
+            r=zu[rd].bj*2;
+            while(r--)
+            {
+                printf("�{");
+            }
+            printf("\n");
+        }
+    }
+    printf("\n******图表分析成功******\n");
+    printf("\n******在此自动为您返回上级******\n");
+}
 int main()
 {
+    system("color f0");//字体色和背景色
+    system("mode con cols=80 lines=40");//屏幕大小
+    HANDLE con=GetStdHandle(STD_OUTPUT_HANDLE);//屏幕缓冲区大小
+    COORD buf={100,5000};//屏幕缓冲区大小（宽*长）
+    SetConsoleScreenBufferSize(con,buf);//屏幕缓冲区大小
     int xz1,xz2,flag1,pd;
     pd=jihuoriqi();
     if(!pd)
@@ -1010,7 +1168,7 @@ int main()
         printf("\n如有不便，请您谅解\n在此自动为您退出程序");
         goto loop2;
     }
-    printf("**********************************************\n\n\n\n\n\n\n          欢迎使用词数统计程序  V2.5\n\n\n\n\n\n\n**********************************************\n\n");
+    printf("*************************************************************\n\n\n\n\n\n\n\n\n\n                欢迎使用英文单词频数统计软件\n\n\n\n\n\n\n\n                                                     V2.6\n\n*************************************************************\n\n");
     shanchuzong();
     while(1)
     {
@@ -1060,8 +1218,8 @@ int main()
                 {
                     if(durupanduan(1))
                     {
-                        beifensj();
                         hebin();
+                        beifensj();
                         printf("\n******和原有数据合并成功******\n");
                         printf("\n合并本篇文章后所有数据在原有数据基础上新增了%d个有效单词\n",xz);
                     }
@@ -1086,7 +1244,7 @@ int main()
             duruzongshu();
             while(1)
             {
-                printf("\n2.查看结果\n3.排序单词\n4.搜索单词\n0.返回上级\n\n请选择：");
+                printf("\n2.查看结果\n3.排序单词\n4.搜索单词\n5.图表分析\n0.返回上级\n\n请选择：");
                 scanf("%d",&xz2);
                 if(xz2!=0&&k==0)
                 {
@@ -1105,6 +1263,10 @@ int main()
                 else if(xz2==4)
                 {
                     sousuo(2);
+                }
+                else if(xz2==5)
+                {
+                    tbfx();
                 }
                 else if(xz2==0)
                 {
@@ -1139,8 +1301,8 @@ int main()
                 {
                     if(durupanduan(1))
                     {
-                        beifensj();
                         hebin();
+                        beifensj();
                         printf("\n******和原有数据合并成功******\n");
                         flag1=1;
                     }
@@ -1175,7 +1337,7 @@ int main()
             int chushiflag=0,huigunflag=0;
             while(1)
             {
-                printf("\n1.初始化程序（删除所有数据-慎选）\n2.回滚数据 （还原到上次未合并前）\n3.联系我们\n0.返回上级\n\n请选择：");
+                printf("\n1.初始化软件（删除所有数据-慎选）\n2.回滚数据 （还原到上次未合并前）\n3.自我修复（异常处理-修复丢失的文件）\n4.联系我们\n0.返回上级\n\n请选择：");
                 scanf("%d",&xz2);
                 if(xz2==0)
                 {
@@ -1208,6 +1370,11 @@ int main()
                     }
                 }
                 else if(xz2==3)
+                {
+                    zwxf();
+                    printf("\n******在此自动为您返回上级******\n");
+                }
+                else if(xz2==4)
                 {
                     lianxiwm(pd);
                 }
